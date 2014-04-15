@@ -3,6 +3,12 @@
 
 {% block content %}
 <p>You are logged in as {{ user.username }}! (<a href="/logout/">Logout</a>)</p>
+<p>Your first name is {{ user.first_name }}.</p>
+<p>Your last name is {{ user.last_name }}.</p>
+<p>Your email is {{ user.email }}.</p>
+<p>Your headline is {{ user.headline }}.</p>
+<p>Your img url is {{ user.picture }}</p>
+<p>Your industry is {{ user.industry }}</p>
 
 <p>Associated:</p>
 {% for assoc in backends.associated %}
