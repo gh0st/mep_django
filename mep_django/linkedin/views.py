@@ -25,6 +25,7 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     scope = ' '.join(settings.SOCIAL_AUTH_LINKEDIN_SCOPE)
+    #print dir(request.user.objects)
     return render_to_response('done.html', {
         'user': request.user,
         'linkedin_id': getattr(settings, 'SOCIAL_AUTH_LINKED_IN_KEY', None),
