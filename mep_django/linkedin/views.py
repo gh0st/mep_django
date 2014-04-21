@@ -7,6 +7,9 @@ from django.http import HttpResponse
 
 from social.backends.linkedin import LinkedinOAuth
 
+from social.apps.django_app.default.models import UserSocialAuth
+import json
+
 def logout(request):
     """Logs out user"""
     auth_logout(request)
@@ -25,9 +28,13 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     scope = ' '.join(settings.SOCIAL_AUTH_LINKEDIN_SCOPE)
-    #print dir(request.user.objects)
+    # get UserSocialAuth object related to loggin-in auth.User object
+    social_user = UserSocialAuth.objects.get(user_id=request.user.id)
+    print type(social_user.extra_data)
+    print social_user.extra_data
     return render_to_response('done.html', {
         'user': request.user,
+        'extra_data': social_user.extra_data,
         'linkedin_id': getattr(settings, 'SOCIAL_AUTH_LINKED_IN_KEY', None),
         'linkedin_scope': scope
     }, RequestContext(request))
