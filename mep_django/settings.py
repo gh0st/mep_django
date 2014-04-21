@@ -89,6 +89,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
+STATIC_ROOT = (
+    os.path.join(BASE_DIR, "static"),
+)
+
 '''
 This is all added by Chad
 '''

@@ -7,6 +7,9 @@ from django.http import HttpResponse
 
 from social.backends.linkedin import LinkedinOAuth
 
+def myindex(request):
+    return render_to_response('myindex.html', {}, RequestContext(request))
+
 def logout(request):
     """Logs out user"""
     auth_logout(request)
