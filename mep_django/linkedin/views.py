@@ -7,13 +7,7 @@ from django.http import HttpResponse
 
 from social.backends.linkedin import LinkedinOAuth
 
-<<<<<<< HEAD
-def myindex(request):
-    return render_to_response('myindex.html', {}, RequestContext(request))
-=======
 from social.apps.django_app.default.models import UserSocialAuth
-import json
->>>>>>> b7048320f09dd0e02d5be4b1c1ec8461a1ce1646
 
 def logout(request):
     """Logs out user"""

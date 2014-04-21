@@ -88,18 +88,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
-#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
-STATIC_ROOT = (
-    os.path.join(BASE_DIR, "static"),
-)
-
-'''
-This is all added by Chad
-'''
-=======
-# Social auth stuff
->>>>>>> b7048320f09dd0e02d5be4b1c1ec8461a1ce1646
 
 SOCIAL_AUTH_LINKEDIN_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '75l485e9k29snc'
