@@ -83,12 +83,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
 #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
 STATIC_ROOT = (
     os.path.join(BASE_DIR, "static"),
@@ -97,31 +97,38 @@ STATIC_ROOT = (
 '''
 This is all added by Chad
 '''
+=======
+# Social auth stuff
+>>>>>>> b7048320f09dd0e02d5be4b1c1ec8461a1ce1646
 
 SOCIAL_AUTH_LINKEDIN_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_SECRET = 'iw7fONMpJZcY5HOb'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'iw7fONMpJZcY5HOb'
 
-SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress']
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile', 'r_emailaddress']
+SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages', 'rw_company_admin']
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages', 'rw_company_admin']
 
-SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address', 'headline', 'industry']
-SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['email-address', 'headline', 'industry']
+SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address', 'headline', 'industry', 'educations', 'picture-url']
+SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['email-address', 'headline', 'industry', 'educations', 'picture-url']
 
 SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [('id', 'id'),
                                    ('firstName', 'first_name'),
                                    ('lastName', 'last_name'),
                                    ('emailAddress', 'email_address'),
                                    ('headline', 'headline'),
-                                   ('industry', 'industry')]
+                                   ('industry', 'industry'),
+                                   ('educations', 'educations'),
+                                   ('pictureUrl', 'pic'),]
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_EXTRA_DATA = [('id', 'id'),
                                           ('firstName', 'first_name'),
                                           ('lastName', 'last_name'),
                                           ('emailAddress', 'email_address'),
                                           ('headline', 'headline'),
-                                          ('industry', 'industry')]                                   
+                                          ('industry', 'industry'),
+                                          ('educations', 'educations'),
+                                          ('pictureUrl', 'pic'),]
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.linkedin.LinkedinOAuth',
@@ -141,13 +148,6 @@ URL_PATH = ''
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 
-''' this is begin ommited because we're not using google+ in our senior project
-SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/userinfo.profile'
-]
-'''
-
 TEMPLATE_DIRS = (
     'templates',
 )
@@ -163,5 +163,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details'
+    'social.pipeline.user.user_details',
 )
