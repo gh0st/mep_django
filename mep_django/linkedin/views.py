@@ -5,9 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.http import HttpResponse
 
-from social.backends.linkedin import LinkedinOAuth
-
 from social.apps.django_app.default.models import UserSocialAuth
+from social.backends.linkedin import LinkedinOAuth
 
 def logout(request):
     """Logs out user"""
@@ -20,10 +19,14 @@ def home(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated():
         return redirect('done')
-    return render_to_response('home.html', {
+    #return render_to_response('home.html', {
+    '''
+    return render_to_response('<script type="text/javascript">window.close(); window.parent.location.href="home.html";</script>', 'home.html', {
         #'linkedin_id': getattr(settings, 'SOCIAL_AUTH_LINKEDIN_KEY', None),
         'login' : False,
     }, RequestContext(request))
+    '''
+    return HttpResponse('<script type="text/javascript">window.close(); window.parent.location.href="done";</script>')
 
 @login_required
 def done(request):

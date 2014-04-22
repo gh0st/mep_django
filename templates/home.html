@@ -27,14 +27,15 @@
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>loc
+                    <li class="divider"></li>
                     <li class="dropdown-header">Nav header</li>
                     <li><a href="#">Separated link</a></li>
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
                 {% if login == False %}
-                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}" ><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+                    <!-- <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}" ><span class="glyphicon glyphicon-user"></span> Sign In</a></li> -->
+                    <li><a class="btn" href="" onclick="window.open('{% url 'social:begin' 'linkedin' %}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
                 {% else %}
                     <li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
                     <!--<li><a class="btn" href="/logout/" >Sign Out</a>-->
