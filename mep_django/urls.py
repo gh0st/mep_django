@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^login/$', 'mep_django.linkedin.views.home'),
     url(r'^logout/$', 'mep_django.linkedin.views.logout'),
     url(r'^done/$', 'mep_django.linkedin.views.done', name='done'),
+    url(r'^temp/$', 'mep_django.linkedin.views.temp'),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

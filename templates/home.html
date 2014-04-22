@@ -34,11 +34,17 @@
                   </ul>
                 </li>
                 {% if login == False %}
-                    <!-- <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}" ><span class="glyphicon glyphicon-user"></span> Sign In</a></li> -->
                     <li><a class="btn" href="" onclick="window.open('{% url 'social:begin' 'linkedin' %}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+                    <!--<li>
+                      <a class="btn" href="{% url 'social:begin' 'linkedin' %}">
+                      <span class="glyphicon glyphicon-user"></span> Sign In</a>
+                        <img src="static/images/signin_with_linkedin.png">
+                      </a>
+                    </li>-->
                 {% else %}
-                    <li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
-                    <!--<li><a class="btn" href="/logout/" >Sign Out</a>-->
+                    <p class="navbar-text"><img src="{{ social_user.extra_data.pic }}" class="img-rounded"></img>{{ user.first_name }} {{ user.last_name }} {{ social_user.extra_data.headline }} {{ user.industry }}</p>
+                    <!--<li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>-->
+                    <li><a class="btn" href="/logout/" >Sign Out</a>
                 {% endif %}
               </ul>
             </div>
