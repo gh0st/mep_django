@@ -42,7 +42,7 @@
                       </a>
                     </li>-->
                 {% else %}
-                    <p class="navbar-text"><img src="{{ social_user.extra_data.pic }}" class="img-rounded"></img>{{ user.first_name }} {{ user.last_name }} {{ social_user.extra_data.headline }} {{ user.industry }}</p>
+                    <p class="navbar-text"><img src="{{ extra_data.pic }}" class="img-rounded"></img>{{ user.first_name }} {{ user.last_name }}</p>
                     <!--<li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>-->
                     <li><a class="btn" href="/logout/" >Sign Out</a>
                 {% endif %}

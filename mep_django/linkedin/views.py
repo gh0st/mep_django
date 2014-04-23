@@ -31,7 +31,8 @@ def done(request):
     # get UserSocialAuth object related to loggin-in auth.User object
     social_user = UserSocialAuth.objects.get(user_id=request.user.id)
     return render_to_response('home.html', {
-        'name' : request.user.first_name,
+        'name': request.user.first_name,
+        'extra_data': social_user.extra_data,
         'login' : True,
     }, RequestContext(request))
 
