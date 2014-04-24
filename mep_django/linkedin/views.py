@@ -35,3 +35,10 @@ def done(request):
         'name' : request.user.first_name,
         'login' : True,
     }, RequestContext(request))
+
+def about(request):
+    return render(request, 'about.html', {})
+
+def contact(request):
+    return render(request, 'contact.html', {})
+
