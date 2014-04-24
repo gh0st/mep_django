@@ -34,7 +34,7 @@
                   </ul>
                 </li>
                 {% if login == False %}
-                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}" ><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}?next={{ request.path }}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
                 {% else %}
                     <li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
                     <!--<li><a class="btn" href="/logout/" >Sign Out</a>-->
