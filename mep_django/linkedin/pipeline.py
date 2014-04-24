@@ -2,6 +2,9 @@ from django.shortcuts import redirect
 
 from social.pipeline.partial import partial
 
+from requests import request, HTTPError
+
+from django.core.files.base import ContentFile
 
 @partial
 def require_email(strategy, details, user=None, is_new=False, *args, **kwargs):
@@ -12,3 +15,4 @@ def require_email(strategy, details, user=None, is_new=False, *args, **kwargs):
             details['email'] = strategy.session_pop('saved_email')
         else:
             return redirect('require_email')
+
