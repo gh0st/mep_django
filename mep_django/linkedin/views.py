@@ -17,24 +17,8 @@ def logout(request):
     }, RequestContext(request))
 
 def home(request):
-    """Home view, displays login mechanism"""
-    if request.user.is_authenticated():
-        return redirect('done')
-    return render_to_response('home.html', {
-        #'linkedin_id': getattr(settings, 'SOCIAL_AUTH_LINKEDIN_KEY', None),
-        'login' : False,
-    }, RequestContext(request))
-
-@login_required
-def done(request):
-    """Login complete view, displays user data"""
-    # scope = ' '.join(settings.SOCIAL_AUTH_LINKEDIN_SCOPE)
-    # get UserSocialAuth object related to loggin-in auth.User object
-    # social_user = UserSocialAuth.objects.get(user_id=request.user.id)
-    return render_to_response('home.html', {
-        'name' : request.user.first_name,
-        'login' : True,
-    }, RequestContext(request))
+    print "displaying home"
+    return render(request, 'home.html', {})
 
 def about(request):
     return render(request, 'about.html', {})

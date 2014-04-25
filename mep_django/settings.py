@@ -87,8 +87,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+# per-app static files folder
 STATIC_URL = '/static/'
 
+# list of directories to search for template files
+TEMPLATE_DIRS = [ 'templates' ]
+
+# python-social-auth settings
 
 SOCIAL_AUTH_LINKEDIN_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '75l485e9k29snc'
@@ -131,16 +136,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.login_redirect',
 )
 
-SOCIAL_AUTH_LOGIN_URL = '/login/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/done/'
+# URL where the user is re-directed after successful login
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+# URL where the user is re-directed in case of an "error"
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
-URL_PATH = ''
+
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
-TEMPLATE_DIRS = (
-    'templates',
-)
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
