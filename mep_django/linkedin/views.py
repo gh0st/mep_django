@@ -9,20 +9,21 @@ from social.backends.linkedin import LinkedinOAuth
 
 from social.apps.django_app.default.models import UserSocialAuth
 
+# logs the user out, then redirects to the home page
 def logout(request):
-    """Logs out user"""
     auth_logout(request)
-    return render_to_response('home.html', {
-        'login' : False,
-    }, RequestContext(request))
+    return redirect('home')
 
+# displays the home page
 def home(request):
     print "displaying home"
     return render(request, 'home.html', {})
 
+# displays the about page
 def about(request):
     return render(request, 'about.html', {})
 
+# displays the contact page
 def contact(request):
     return render(request, 'contact.html', {})
 
