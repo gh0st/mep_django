@@ -25,7 +25,7 @@ SECRET_KEY = 'qb$p2*7_*$hldj(e_cu3r*tr(#1%fc2d8_ekr_y@rg&&5^$fe='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-SOCICAL_AUTH_RAISE_EXCEPTIONS = True
+
 RAISE_EXCEPTIONS = True
 
 TEMPLATE_DEBUG = True
@@ -138,8 +138,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # URL where the user is re-directed after successful login
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-# URL where the user is re-directed in case of an "error"
+
+# URL where the user is re-directed in case python-social-auth raises an exception
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
