@@ -16,7 +16,7 @@
               </button>
               <a class="navbar-brand" href="#">MESA Engineering Program</a>
             </div>
-            <div class="navbar-collapse collapse navbar-right" style="padding-right:20px;">
+            <div class="navbar-collapse collapse" style="padding-right:30px;">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -33,18 +33,45 @@
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
                 {% if login == False %}
+                    <!-- we know this works, it's been tested, but we want to try to take advantage of twitterbootstrap and use modal! ;)
                     <li><a class="btn" href="" onclick="window.open('{% url 'social:begin' 'linkedin' %}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
-                    <!--<li>
+                    -->
+                    <!--
+                    <li>
                       <a class="btn" href="{% url 'social:begin' 'linkedin' %}">
                       <span class="glyphicon glyphicon-user"></span> Sign In</a>
-                        <img src="static/images/signin_with_linkedin.png">
+                      <img src="static/images/signin_with_linkedin.png">
                       </a>
-                    </li>-->
+                    </li>
+                    -->
+                    <li>
+                      <a data-toggle="modal" data-target="#loginModal" href="{% url 'social:begin' 'linkedin' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a>
+                    </li>
+                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Login Modal</h4>
+                          </div>
+                          <div class="modal-body">
+                            <h3>Content</h3>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 {% else %}
-                    <p class="navbar-text"><img src="{{ extra_data.pic }}" class="img-rounded"></img>{{ user.first_name }} {{ user.last_name }}</p>
-                    <!--<li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>-->
-                    <li><a class="btn" href="/logout/" >Sign Out</a>
+                    <p class="navbar-text"><img src="{{ extra_data.pic }}" class="img-rounded"></img> {{ user.first_name }} {{ user.last_name }}</p>
+                    <!--
+                    <li><a class="btn" href="/logout/" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
+                    -->
+                    <li><a href="/logout/">Sign Out</a>
                 {% endif %}
               </ul>
             </div>
