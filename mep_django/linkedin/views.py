@@ -9,36 +9,21 @@ from social.backends.linkedin import LinkedinOAuth
 
 from social.apps.django_app.default.models import UserSocialAuth
 
+# logs the user out, then redirects to the home page
 def logout(request):
-    """Logs out user"""
     auth_logout(request)
-    return render_to_response('home.html', {
-        'login' : False,
-    }, RequestContext(request))
+    return redirect('home')
 
+# displays the home page
 def home(request):
-    """Home view, displays login mechanism"""
-    if request.user.is_authenticated():
-        return redirect('done')
-    return render_to_response('home.html', {
-        #'linkedin_id': getattr(settings, 'SOCIAL_AUTH_LINKEDIN_KEY', None),
-        'login' : False,
-    }, RequestContext(request))
+    print "displaying home"
+    return render(request, 'home.html', {})
 
-@login_required
-def done(request):
-    """Login complete view, displays user data"""
-    # scope = ' '.join(settings.SOCIAL_AUTH_LINKEDIN_SCOPE)
-    # get UserSocialAuth object related to loggin-in auth.User object
-    # social_user = UserSocialAuth.objects.get(user_id=request.user.id)
-    return render_to_response('home.html', {
-        'name' : request.user.first_name,
-        'login' : True,
-    }, RequestContext(request))
-
+# displays the about page
 def about(request):
     return render(request, 'about.html', {})
 
+# displays the contact page
 def contact(request):
     return render(request, 'contact.html', {})
 
