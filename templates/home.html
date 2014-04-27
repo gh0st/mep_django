@@ -2,52 +2,6 @@
 {% load url from future %}
 
 {% block content %}
-<div class="navbar-wrapper">
-      <div class="container">
-
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">MESA Engineering Program</a>
-            </div>
-            <div class="navbar-collapse collapse navbar-right" style="padding-right:20px;">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>loc
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-                {% if not user.is_authenticated %}
-                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
-                {% else %}
-                    <li><a class="btn" href="{% url 'logout' %}" ><span class="glyphicon glyphicon-user"></span> Log Out {{ user.first_name }}</a></li>
-                    <!--<li><a class="btn" href="/logout/" >Sign Out</a>-->
-                {% endif %}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -59,32 +13,31 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <!-- <img src="/static/images/RiverSideTallBannerGlowWatermark.png" data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide"> -->
-          <img src="/static/images/RiverSideTallBannerGlowWatermark.png" alt="My Picture">
+          <img src="/static/images/trees.jpg" alt="Paintball" width="577">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+              <h1>Paintball Event.</h1>
+              <p>MESA will be hosting a full-campus, hardcore-rules, martial law painball event.</br>The winner will receive a Roxio MP3 player.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img src="/static/images/RiverSideTallBannerGlowWatermark.png" data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
+          <img src="/static/images/sunset.jpg" alt="Staring">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>Physics Professors Host Staring Contest.</h1>
+              <p>The student which stares at the sun the longest wins.</br> Prize is $5 and a PBR.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
+          <img src="/static/images/bridge.jpg" alt="Suicide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>Are we in the Matrix?</h1>
+              <p>Record number of students attempt to find out by leaping from bridge.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
             </div>
           </div>
