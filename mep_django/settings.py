@@ -25,7 +25,7 @@ SECRET_KEY = 'qb$p2*7_*$hldj(e_cu3r*tr(#1%fc2d8_ekr_y@rg&&5^$fe='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-SOCICAL_AUTH_RAISE_EXCEPTIONS = True
+
 RAISE_EXCEPTIONS = True
 
 TEMPLATE_DEBUG = True
@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'mep_django.linkedin.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'mep_django.urls'
@@ -86,8 +87,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+# per-app static files folder
 STATIC_URL = '/static/'
 
+# list of directories to search for template files
+TEMPLATE_DIRS = [ 'templates' ]
+
+# python-social-auth settings
 
 SOCIAL_AUTH_LINKEDIN_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '75l485e9k29snc'
@@ -130,16 +136,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.login_redirect',
 )
 
-LOGIN_URL = '/login/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/temp/' # this must be the page that will serve the javascript for closing the login popup.
-LOGIN_REDIRECT_URL = '/done/'
-URL_PATH = ''
+# URL where the user is re-directed after successful login
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/temp/' # this must be the page that will serve the javascript for closing the login page.
+
+# URL where the user is re-directed in case python-social-auth raises an exception
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
-TEMPLATE_DIRS = (
-    'templates',
-)
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
