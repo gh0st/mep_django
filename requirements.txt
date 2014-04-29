@@ -1,5 +1,6 @@
 Django==1.6.2
 oauthlib==0.6.1
+python-linkedin==4.0
 python-openid==2.2.5
 python-social-auth==0.1.23
 requests==2.2.1
