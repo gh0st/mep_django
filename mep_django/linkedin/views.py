@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
 from social.apps.django_app.default.models import UserSocialAuth
 from linkedin import linkedin
-from django.http import HttpResponse
+#from django.http import HttpResponse
 
 # logs the user out, then redirects to the home page
 def logout(request):
@@ -58,8 +58,7 @@ def news(request):
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
     
     app = linkedin.LinkedInApplication(auth)
-    #profile = app.get_profile()
     post_selectors = ['title', 'summary']
     posts = app.get_posts(1627067, selectors=post_selectors)
-    return HttpResponse(str(posts))
+    return render(request, 'news.html', {'post_list':posts['values']})
 

@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>This is the template news page</p>
+
+{% for post in post_list %}
+<p>Title: {{ post.title }}</p>
+<p>Summary: {{ post.summary }}</p>
+{% endfor %}
+
 {% endblock %}
 
 
