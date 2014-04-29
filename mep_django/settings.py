@@ -53,7 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'mep_django.linkedin.middleware.SocialAuthExceptionMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'mep_django.urls'
@@ -96,15 +96,11 @@ TEMPLATE_DIRS = [ 'templates' ]
 # python-social-auth settings
 
 SOCIAL_AUTH_LINKEDIN_KEY = '75l485e9k29snc'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '75l485e9k29snc'
 SOCIAL_AUTH_LINKEDIN_SECRET = 'iw7fONMpJZcY5HOb'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'iw7fONMpJZcY5HOb'
 
 SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages', 'rw_company_admin']
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages', 'rw_company_admin']
 
 SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = ['email-address', 'headline', 'industry', 'educations', 'picture-url']
-SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['email-address', 'headline', 'industry', 'educations', 'picture-url']
 
 SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [('id', 'id'),
                                    ('firstName', 'first_name'),
@@ -115,18 +111,8 @@ SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [('id', 'id'),
                                    ('educations', 'educations'),
                                    ('pictureUrl', 'pic'),]
 
-SOCIAL_AUTH_LINKEDIN_OAUTH2_EXTRA_DATA = [('id', 'id'),
-                                          ('firstName', 'first_name'),
-                                          ('lastName', 'last_name'),
-                                          ('emailAddress', 'email_address'),
-                                          ('headline', 'headline'),
-                                          ('industry', 'industry'),
-                                          ('educations', 'educations'),
-                                          ('pictureUrl', 'pic'),]
-
 AUTHENTICATION_BACKENDS = (
     'social.backends.linkedin.LinkedinOAuth',
-    'social.backends.linkedin.LinkedinOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -140,9 +126,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 # URL where the user is re-directed in case python-social-auth raises an exception
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/error/'
+LOGIN_ERROR_URL = '/'
 
-SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+# Keep this false or python-social-auth won't actually redirect to the URL we want
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
@@ -153,7 +140,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'mep_django.linkedin.pipeline.require_email',
     'social.pipeline.mail.mail_validation',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
