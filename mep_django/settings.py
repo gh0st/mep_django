@@ -53,7 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'mep_django.linkedin.middleware.SocialAuthExceptionMiddleware',
+    #'mep_django.linkedin.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'mep_django.urls'
@@ -160,3 +160,4 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
 )
+

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+
+<p>{{ name }}</p>
+<p>{{ headline }}</p>
+<p>{{ industry }}</p>
+<p><img src="{{ pic_url }}" alt="user's picture"/></p>
+{% endblock %}
+
