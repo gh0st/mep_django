@@ -2,10 +2,11 @@
 {% load url from future %}
 
 {% block content %}
-
-<p>{{ name }}</p>
-<p>{{ headline }}</p>
-<p>{{ industry }}</p>
-<p><img src="{{ pic_url }}" alt="user's picture"/></p>
+<div class="container" style="margin:120px auto 0px auto">
+    <p>{{ name }}</p>
+    <p>{{ headline }}</p>
+    <p>{{ industry }}</p>
+    <p><img src="{{ pic_url }}" alt="user's picture"/></p>
+</div>
 {% endblock %}
 
