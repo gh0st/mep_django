@@ -67,7 +67,22 @@ def news(request):
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
     
     app = linkedin.LinkedInApplication(auth)
-    post_selectors = ['title', 'summary']
+    post_selectors = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
+    
     posts = app.get_posts(1627067, selectors=post_selectors)
+    '''
+    for post in posts['values']:
+        for k, v in post.iteritems():
+            if k == 'creator':
+                print 'Creator{'
+                for k2, v2 in post['creator'].iteritems():
+                    print '\t' + str(k2) + ': '
+                    print '\t' + str(v2) + '\n'
+                print '}'
+            else:
+                print str(k) + ': '
+                print str(v) + '\n'
+            #raw_input()
+    '''
     return render(request, 'news.html', {'post_list':posts['values']})
     
