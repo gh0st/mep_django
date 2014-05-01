@@ -57,21 +57,28 @@ def get_access_tokens(user):
     return (OAUTH_USER_TOKEN, OAUTH_USER_TOKEN_SECRET)
 
 def news(request):
+    """Diplays the LinkedIn content, this is the critical view of the app"""
+    '''
     if not request.user.is_authenticated():
         return redirect('home')
-    
+    '''
     API_KEY = '75l485e9k29snc'
     API_SECRET = 'iw7fONMpJZcY5HOb'
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
+    
+    GROUP_ID = 1627067
+    COMPANY_ID = None
+    USER_ID = None
 
+    POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
+	
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
-    
     app = linkedin.LinkedInApplication(auth)
-    post_selectors = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
     
-    posts = app.get_posts(1627067, selectors=post_selectors)
+    group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
+    
     '''
-    for post in posts['values']:
+    for post in group_posts['values']:
         for k, v in post.iteritems():
             if k == 'creator':
                 print 'Creator{'
@@ -84,5 +91,5 @@ def news(request):
                 print str(v) + '\n'
             #raw_input()
     '''
-    return render(request, 'news.html', {'post_list':posts['values']})
+    return render(request, 'news.html', {'post_list':group_posts['values']})
     
