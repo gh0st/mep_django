@@ -27,14 +27,14 @@
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>loc
+                    <li class="divider"></li>
                     <li class="dropdown-header">Nav header</li>
                     <li><a href="#">Separated link</a></li>
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
                 {% if not user.is_authenticated %}
-                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+                    <li><a class="btn" href="{% url 'social:begin' 'linkedin' %}"><span class="glyphicon glyphicon-user"></span> Sign <span ><img style="width:16px; height:16px;" src="/static/images/linked-in.png" alt="LinkedIN"></span></a></li>
                 {% else %}
                     <li><a class="btn" href="{% url 'logout' %}" ><span class="glyphicon glyphicon-user"></span> Log Out {{ user.first_name }}</a></li>
                     <!--<li><a class="btn" href="/logout/" >Sign Out</a>-->
