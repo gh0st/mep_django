@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin:120px auto 0px auto">
+    {% for post in post_list %}
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    	<p>{{ post.creator.firstName }}</p>
+                        {% if post.creator.pictureUrl %}
+                            <p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
+                        {% endif %}
+                        <h3 class="panel-title">{{ post.title }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ post.summary }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
