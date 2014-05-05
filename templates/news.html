@@ -9,11 +9,7 @@
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-<<<<<<< HEAD
-                        <p>{{ post.creator.firstName }}</p>
-=======
                     	<p>{{ post.creator.firstName }}</p>
->>>>>>> e2b9cb0a6a923a967db7960395b7a233fbeaadc8
                         {% if post.creator.pictureUrl %}
                             <p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
                         {% endif %}
@@ -28,6 +24,41 @@
         </div>
     {% endfor %}
 </div>
+
+
+<div class="container" style="margin:120px auto 0px auto">
+    {% for update in update_list %}
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    	<p>{{ update.comment }}</p>
+                    </div>
+                    <div class="panel-body">
+                        {% if update.description %}
+                            <p>{{ update.description }}</p>
+                        {% endif %}
+                        
+                        {% if update.submittedImageUrl %}
+                            <p><img src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
+                        {% endif %}
+                        
+                        {% if update.title %}
+                            <p>{{ update.title }}</p>
+                        {% endif %}
+                        
+                        {% if update.submittedUrl %}
+                            <p>{{ update.submittedUrl }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 
 {% endblock %}
 

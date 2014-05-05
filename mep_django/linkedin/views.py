@@ -67,18 +67,36 @@ def news(request):
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
     
     GROUP_ID = 1627067
-    COMPANY_ID = None
-    COMPANY_NAMES = ['apple', 'google', 'samsung',]
+    COMPANY_ID = 1035
 
     POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
-    COMPANY_SELECTORS = ['name'] 
+    COMPANY_SELECTORS = ['name', 'id'] 
 	
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
     app = linkedin.LinkedInApplication(auth)
     
     group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
     
-    print app.get_companies(company_ids=COMPANY_ID, universal_names=COMPANY_NAMES, selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
+    company = app.get_companies(company_ids=[COMPANY_ID], selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
+   
+    updates = app.get_company_updates(COMPANY_ID, params={'count': 3, 'event-type': 'status-update',})
+    
+    import pprint
+    pp = pprint.PrettyPrinter(indent=2)
+    
+    pp.pprint(updates['values'])
+    
+    update_list = []
+    for update in updates['values']:
+        my_dict = {'comment': update['updateContent']['companyStatusUpdate']['share']['comment']}
+        if update['updateContent']['companyStatusUpdate']['share'].get('content'):
+            my_dict['description'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('description')
+            my_dict['submittedImageUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedImageUrl')
+            my_dict['title'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('title')
+            my_dict['submittedUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedUrl')
+        update_list.append(my_dict)
+    
+    
     
     '''
     for post in group_posts['values']:
@@ -94,5 +112,5 @@ def news(request):
                 print str(v) + '\n'
             #raw_input()
     '''
-    return render(request, 'news.html', {'post_list':group_posts['values']})
+    return render(request, 'news.html', {'post_list':group_posts['values'], 'update_list': update_list})
     
