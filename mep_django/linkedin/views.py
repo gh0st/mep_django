@@ -69,7 +69,7 @@ def news(request):
     app = linkedin.LinkedInApplication(auth)
     post_selectors = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
     
-    posts = app.get_posts(1627067, selectors=post_selectors)
+    posts = app.get_posts(1839561, selectors=post_selectors)
     '''
     for post in posts['values']:
         for k, v in post.iteritems():
