@@ -45,20 +45,11 @@
                 <li class="active"><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
-                <li><a href="{% url 'news' %}">News</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'news' %}">News</a></li>
+                {% else %}
+
+                {% endif %}
                 {% if not user.is_authenticated %}
                     <!-- we know this works, it's been tested, but we want to try to take advantage of twitterbootstrap and use modal! ;) -->
                     <li><a class="btn" href="" onclick="window.open('{% url 'social:begin' 'linkedin' %}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');"><span class="glyphicon glyphicon-user"></span> Sign <img src="/static/images/glyphicons_social/glyphicons_social_17_linked_in.png"></a></li>

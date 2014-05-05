@@ -58,24 +58,27 @@ def get_access_tokens(user):
 
 def news(request):
     """Diplays the LinkedIn content, this is the critical view of the app"""
-    '''
+    
     if not request.user.is_authenticated():
         return redirect('home')
-    '''
+    
     API_KEY = '75l485e9k29snc'
     API_SECRET = 'iw7fONMpJZcY5HOb'
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
     
     GROUP_ID = 1627067
     COMPANY_ID = None
-    USER_ID = None
+    COMPANY_NAMES = ['apple', 'google', 'samsung',]
 
     POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
+    COMPANY_SELECTORS = ['name'] 
 	
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
     app = linkedin.LinkedInApplication(auth)
     
     group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
+    
+    print app.get_companies(company_ids=COMPANY_ID, universal_names=COMPANY_NAMES, selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
     
     '''
     for post in group_posts['values']:

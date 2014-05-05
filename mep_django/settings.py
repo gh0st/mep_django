@@ -126,7 +126,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/temp/' # this must be the page that will serve the javascript for closing the login page.
 
 # URL where the user is re-directed in case python-social-auth raises an exception
-LOGIN_ERROR_URL = '/'
+LOGIN_ERROR_URL = '/temp/'
 
 # Keep this false or python-social-auth won't actually redirect to the URL we want
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
