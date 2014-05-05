@@ -2,63 +2,123 @@
 
 {% block content %}
 
+
+<!--
 <div class="container" style="margin:120px auto 0px auto">
-    {% for post in post_list %}
-        <div class="row">
-            <div class="col-md-12">
+			{% for post in post_list %}
+				<div class="row">
+					<div class="col-md-12">
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                    	<p>{{ post.creator.firstName }}</p>
-                        {% if post.creator.pictureUrl %}
-                            <p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
-                        {% endif %}
-                        <h3 class="panel-title">{{ post.title }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{ post.summary }}
-                    </div>
-                </div>
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<p>{{ post.creator.firstName }}</p>
+								{% if post.creator.pictureUrl %}
+									<p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
+								{% endif %}
+								<h3 class="panel-title">{{ post.title }}</h3>
+							</div>
+							<div class="panel-body">
+								{{ post.summary }}
+							</div>
+						</div>
 
-            </div>
-        </div>
-    {% endfor %}
-</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+
+		<div class="container" style="margin:120px auto 0px auto">
+			{% for update in update_list %}
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<p>{{ update.comment }}</p>
+							</div>
+							<div class="panel-body">
+								{% if update.description %}
+									<p>{{ update.description }}</p>
+								{% endif %}
+						
+								{% if update.submittedImageUrl %}
+									<p><img src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
+								{% endif %}
+						
+								{% if update.title %}
+									<p>{{ update.title }}</p>
+								{% endif %}
+						
+								{% if update.submittedUrl %}
+									<p>{{ update.submittedUrl }}</p>
+								{% endif %}
+							</div>
+						</div>
+
+					</div>
+				</div>
+			{% endfor %}
+		</div> 
+		
+		-->
 
 
 <div class="container" style="margin:120px auto 0px auto">
-    {% for update in update_list %}
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                    	<p>{{ update.comment }}</p>
-                    </div>
-                    <div class="panel-body">
-                        {% if update.description %}
-                            <p>{{ update.description }}</p>
-                        {% endif %}
-                        
-                        {% if update.submittedImageUrl %}
-                            <p><img src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
-                        {% endif %}
-                        
-                        {% if update.title %}
-                            <p>{{ update.title }}</p>
-                        {% endif %}
-                        
-                        {% if update.submittedUrl %}
-                            <p>{{ update.submittedUrl }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    {% endfor %}
+	<div class="col-md-8">
+		{% for post in post_list %}
+				<div class="row">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<p>{{ post.creator.firstName }}</p>
+							{% if post.creator.pictureUrl %}
+								<p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
+							{% endif %}
+							<h3 class="panel-title">{{ post.title }}</h3>
+						</div>
+						<div class="panel-body">
+							{{ post.summary }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			
+		{% for update in update_list %}
+				<div class="row">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<p>{{ update.comment }}</p>
+						</div>
+						<div class="panel-body">
+							{% if update.description %}
+								<p>{{ update.description }}</p>
+							{% endif %}
+					
+							{% if update.submittedImageUrl %}
+								<p><img src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
+							{% endif %}
+					
+							{% if update.title %}
+								<p>{{ update.title }}</p>
+							{% endif %}
+					
+							{% if update.submittedUrl %}
+								<p>{{ update.submittedUrl }}</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+	</div>
+	<div class="col-md-4">
+        <div data-spy="affix" data-offset-top="60" data-offset-bottom="200" class="panel panel-default">
+			<div class="panel-body">
+				<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+				<script type="IN/JYMBII" data-format="inline"></script>
+			</div>
+		</div>
+	</div>
 </div>
-
 
 {% endblock %}
 
