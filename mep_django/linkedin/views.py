@@ -79,7 +79,7 @@ def news(request):
     
     company = app.get_companies(company_ids=[COMPANY_ID], selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
    
-    updates = app.get_company_updates(COMPANY_ID, params={'count': 3, 'event-type': 'status-update',})
+    updates = app.get_company_updates(COMPANY_ID, params={'count': 10, 'event-type': 'status-update',})
     
     import pprint
     pp = pprint.PrettyPrinter(indent=2)
@@ -93,7 +93,7 @@ def news(request):
             my_dict['description'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('description')
             my_dict['submittedImageUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedImageUrl')
             my_dict['title'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('title')
-            my_dict['submittedUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedUrl')
+            my_dict['shortenedUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('shortenedUrl')
         update_list.append(my_dict)
     
     
