@@ -57,21 +57,50 @@ def get_access_tokens(user):
     return (OAUTH_USER_TOKEN, OAUTH_USER_TOKEN_SECRET)
 
 def news(request):
+    """Diplays the LinkedIn content, this is the critical view of the app"""
+    
     if not request.user.is_authenticated():
         return redirect('home')
     
     API_KEY = '75l485e9k29snc'
     API_SECRET = 'iw7fONMpJZcY5HOb'
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
+    
+    GROUP_ID = 1627067
+    COMPANY_ID = 1035
 
+    POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
+    COMPANY_SELECTORS = ['name', 'id'] 
+	
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
-    
     app = linkedin.LinkedInApplication(auth)
-    post_selectors = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
     
-    posts = app.get_posts(1839561, selectors=post_selectors)
+    group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
+    
+    company = app.get_companies(company_ids=[COMPANY_ID], selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
+   
+    updates = app.get_company_updates(COMPANY_ID, params={'count': 3, 'event-type': 'status-update',})
+    
+    import pprint
+    pp = pprint.PrettyPrinter(indent=2)
+    
+    pp.pprint(updates['values'])
+    
+    update_list = []
+    for update in updates['values']:
+        my_dict = {'comment': update['updateContent']['companyStatusUpdate']['share']['comment']}
+        if update['updateContent']['companyStatusUpdate']['share'].get('content'):
+            my_dict['description'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('description')
+            my_dict['submittedImageUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedImageUrl')
+            my_dict['title'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('title')
+            my_dict['submittedUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('submittedUrl')
+        update_list.append(my_dict)
+    
+    
+    
+
     '''
-    for post in posts['values']:
+    for post in group_posts['values']:
         for k, v in post.iteritems():
             if k == 'creator':
                 print 'Creator{'
@@ -84,5 +113,5 @@ def news(request):
                 print str(v) + '\n'
             #raw_input()
     '''
-    return render(request, 'news.html', {'post_list':posts['values']})
+    return render(request, 'news.html', {'post_list':group_posts['values'], 'update_list': update_list})
     
