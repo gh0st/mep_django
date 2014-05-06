@@ -1,23 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+        .item {
 
-<div class="container" style="margin:120px auto 0px auto">
+            width:45%;
+            margin:12px 12px;
+        }
+        .item.w2 {
+            width:50%;
+        }
+    </style>
+<script>
+/*
+    var $container = $('#container');
+    // init
+    $container.isotope({
+        //options
+        itemSelector: '.panel-primary',
+        layoutMode: 'fitRows'
+    });
+*/
+</script>
+
+<div class="container js-isotope" data-isotope-options='{"masonry": { "columnWidth": 100 }, "itemSelector": ".panel"}' style="margin:120px auto 0px auto">
+<!--<div class="container" style="margin:120px auto 0px auto">-->
     {% for post in post_list %}
-        <div class="row">
-            <div class="col-md-12">
+    <div class="row">
+        <!--<div class="col-md-12">-->
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{ post.title }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{ post.summary }}
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ post.title }} written by <img src="{{ post.creator.pictureUrl }}"></img> {{ post.creator.firstName }} {{ post.creator.lastName }}</h3>
                 </div>
+                <div class="panel-body">
+                    {{ post.summary }}
+                </div>
+            </div><!-- ./panel panel-primary -->
 
-            </div>
-        </div>
+        <!--</div><!-- ./col-md-12 -->
+    </div><!-- ./row -->
     {% endfor %}
 </div>
 

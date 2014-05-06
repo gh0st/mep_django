@@ -32,6 +32,8 @@ def profile(request):
         social_user = request.user.social_auth.get()
         # retrieve data to pass to template
         name = social_user.extra_data['first_name'] + ' ' + social_user.extra_data['last_name']
+        first_name = social_user.extra_data['first_name']
+        last_name = social_user.extra_data['last_name']
         pic_url = social_user.extra_data['pic']
         headline = social_user.extra_data['headline']
         industry = social_user.extra_data['industry']
@@ -62,7 +64,7 @@ def news(request):
     auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
     
     app = linkedin.LinkedInApplication(auth)
-    post_selectors = ['title', 'summary']
+    post_selectors = ['title', 'summary', 'creation-timestamp', 'creator']
     posts = app.get_posts(1627067, selectors=post_selectors)
     return render(request, 'news.html', {'post_list':posts['values']})
     
