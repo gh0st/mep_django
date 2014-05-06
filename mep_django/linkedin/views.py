@@ -66,7 +66,7 @@ def news(request):
     API_SECRET = 'iw7fONMpJZcY5HOb'
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
     
-    GROUP_ID = 1627067
+    GROUP_ID = 1839561
     COMPANY_ID = 1035
 
     POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
