@@ -3,7 +3,7 @@ from django.contrib.auth import logout as auth_logout
 from social.apps.django_app.default.models import UserSocialAuth
 from linkedin import linkedin
 #from django.http import HttpResponse
-
+from django.core.exceptions import PermissionDenied
 
 def logout(request):
     """logs the user out, then redirects to the home page"""
@@ -14,7 +14,6 @@ def home(request):
     """displays the home page"""
     return render(request, 'home.html', {})
 
-
 def about(request):
     """displays the about page"""
     return render(request, 'about.html', {})
@@ -23,7 +22,6 @@ def contact(request):
     """displays the contact page"""
     return render(request, 'contact.html', {})
     
-
 def temp(request):
     """this is used for the popup window which houses the linkedin login page"""
     return render(request, 'temp.html', {})
@@ -59,9 +57,13 @@ def get_access_tokens(user):
 def news(request):
     """Diplays the LinkedIn content, this is the critical view of the app"""
     
-    if not request.user.is_authenticated():
-        return redirect('home')
+    #if not request.user.is_authenticated():
+        #return redirect('home')
     
+    # handle unauthorized access with a 403
+    if not request.user.is_authenticated() or not request.user.is_active:
+        raise PermissionDenied
+
     API_KEY = '75l485e9k29snc'
     API_SECRET = 'iw7fONMpJZcY5HOb'
     USER_KEY, USER_SECRET = get_access_tokens(request.user)
@@ -114,4 +116,4 @@ def news(request):
             #raw_input()
     '''
     return render(request, 'news.html', {'post_list':group_posts['values'], 'update_list': update_list})
-    
+
