@@ -1,63 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--
-<style>
-        .item {
-            width:45%;
-            margin:12px 12px;
-        }
-        .item.w2 {
-            width:50%;
-        }
-    </style>
-<script>
-/*
-    var $container = $('#container');
-    // init
-    $container.isotope({
-        //options
-        itemSelector: '.panel-primary',
-        layoutMode: 'fitRows'
-    });
-*/
-</script>
 
-<div class="container js-isotope" data-isotope-options='{"masonry": { "columnWidth": 100 }, "itemSelector": ".panel"}' style="margin:120px auto 0px auto">
-<!--<div class="container" style="margin:120px auto 0px auto">-->
-    <!--{% for post in post_list %}
-    <div class="row">
-        <!--<div class="col-md-12">-->
-
-        <!--    <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ post.title }} written by <img src="{{ post.creator.pictureUrl }}"></img> {{ post.creator.firstName }} {{ post.creator.lastName }}</h3>
-                </div>
-                <div class="panel-body">
-                    {{ post.summary }}
-                </div>
-            </div><!-- ./panel panel-primary -->
-
-        <!--</div><!-- ./col-md-12 -->
-    <!--/div><!-- ./row -->
-    <!--{% endfor %}
--->
-<div class="container" style="margin:120px auto 0px auto">
+<div id="container" class="container" style="margin:120px auto 0px auto">
 	<div class="col-md-8">
 		{% for post in post_list %}
             <div class="row">
+                
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <p>{{ post.creator.firstName }}</p>
+                        <div class="row">
+                            <div class="col-md-2">
                         {% if post.creator.pictureUrl %}
-                            <p><img src="{{ post.creator.pictureUrl }}" alt="user's picture"/></p>
+                                <a href="#"><img class="media-object" style="dislay:inline-block" src="{{ post.creator.pictureUrl }}" alt="user's picture"/></img></a>
                         {% endif %}
-                        <h3 class="panel-title">{{ post.title }}</h3>
-                    </div>
+                            </div><!-- ./col-md-2 -->
+                            <div class="col-md-6">
+                        <h3 class="panel-title" style="display:inline-block">
+                            
+                            {{ post.title }} <small>{{ post.creator.firstName }}</small>
+                        </h3>
+                            </div><!-- ./col-md-6 -->
+                        </div><!-- /.row -->
+                     </div>
                     <div class="panel-body">
                         {{ post.summary }}
                     </div>
                 </div>
+                <hr/>
+
             </div>
         {% endfor %}
 			
