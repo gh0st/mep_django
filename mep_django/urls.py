@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^about/$', views.about, name='about'),
     url(r'^contact/$', views.contact, name='contact'),
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^discussions/$', views.discussions, name='discussions'),
     url(r'^news/$', views.news, name='news'),
     url('', include('social.apps.django_app.urls', namespace='social')),
 )
