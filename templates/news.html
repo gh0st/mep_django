@@ -1,46 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <div id="container" class="container" style="margin:120px auto 0px auto">
-	<div class="col-md-8">
-		{% for post in post_list %}
-            <div class="row">
-                
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-2">
-                        {% if post.creator.pictureUrl %}
-                                <a href="#"><img class="media-object" style="dislay:inline-block" src="{{ post.creator.pictureUrl }}" alt="user's picture"/></img></a>
-                        {% endif %}
-                            </div><!-- ./col-md-2 -->
-                            <div class="col-md-6">
-                        <h3 class="panel-title" style="display:inline-block">
-                            
-                            {{ post.title }} <small>{{ post.creator.firstName }}</small>
-                        </h3>
-                            </div><!-- ./col-md-6 -->
-                        </div><!-- /.row -->
-                     </div>
-                    <div class="panel-body">
-                        {{ post.summary }}
-                    </div>
-                </div>
-                <hr/>
-
-            </div>
-        {% endfor %}
-			
+	
+    <div class="col-md-8">			
 		{% for update in update_list %}
             <div class="row">
-                <div class="panel panel-primary">
+
+                <div class="panel panel-primary" onclick="window.open('{{ update.shortenedUrl }}')">
+                    <a class="test1" hidden="true" href="{{ update.shortenedUrl }}"></a>
                     <div class="panel-heading">
+                        {% if update.title %}
+                            <h3 class="panel-title">{{ update.title }}</h3>
+                        {% endif %}
+
+                        <!--
                         {% if update.shortenedUrl %}
-                            <a style="color:white" href=" {{ update.shortenedUrl }}"> {{ update.comment }}</a>
+                            <a style="color:white" href="{{ update.shortenedUrl }}"> {{ update.comment }}</a>
                         {% else %}
                             <p>{{ update.comment }}</p>
-                        {% endif %}
+                        {% endif %}-->
                     </div>
                     <div class="panel-body">
                         {% if update.description %}
@@ -48,17 +27,14 @@
                         {% endif %}
                 
                         {% if update.submittedImageUrl %}
-                            <p><img style="overflow:hidden;height:300px;" src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
-                        {% endif %}
-                
-                        {% if update.title %}
-                            <p>{{ update.title }}</p>
+                            <p style="overflow:hidden"><img style="width:100%;height:100%;" src="{{ update.submittedImageUrl }}" alt="company's picture"/></p>
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            </div><!-- ./row -->
         {% endfor %}
-	</div>
+	</div><!-- ./col-md-8 -->
+
 	<div class="col-md-4">
         <div data-spy="affix" data-offset-top="60" data-offset-bottom="200" class="panel panel-default">
 			<div class="panel-body">
@@ -66,7 +42,8 @@
 				<script type="IN/JYMBII" data-format="inline"></script>
 			</div>
 		</div>
-	</div>
+	</div><!-- ./col-md-4 -->
+
 </div>
 
 {% endblock %}

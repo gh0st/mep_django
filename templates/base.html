@@ -107,8 +107,12 @@
             
             $('ul.nav > li').removeClass('active');
             $(this).addClass('active');                
-        });            
-    });*/
+        });
+        });
+        $('.clickable-panel').click(function(){
+            alert("click triggered...");
+            $(this).find('a').click();
+        });*/
     </script>
   </body>
 </html>
