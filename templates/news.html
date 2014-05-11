@@ -7,7 +7,7 @@
 		{% for update in update_list %}
             <div class="row">
 
-                <div class="panel panel-primary" onclick="window.open('{{ update.shortenedUrl }}')">
+                <div class="panel panel-primary clickablePanel" style="cursor:pointer;" onclick="window.open('{{ update.shortenedUrl }}')">
                     <a class="test1" hidden="true" href="{{ update.shortenedUrl }}"></a>
                     <div class="panel-heading">
                         {% if update.title %}

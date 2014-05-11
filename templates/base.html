@@ -102,13 +102,17 @@
                 $thisLi.addClass('active');
             }
         });
-    	/*$(document).ready(function () {
-        $('ul.nav > li').click(function (e) {
+    	$(document).ready(function () {
+            $('.clickablePanel').hover(function(){
+                $(this).toggleClass('mep-news-shadow');
+            });
+        });
+        /*$('ul.nav > li').click(function (e) {
             
             $('ul.nav > li').removeClass('active');
             $(this).addClass('active');                
         });
-        });
+        
         $('.clickable-panel').click(function(){
             alert("click triggered...");
             $(this).find('a').click();
