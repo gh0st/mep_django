@@ -67,7 +67,7 @@ def discussions(request):
     if not request.user.is_authenticated() or not request.user.is_active:
         raise PermissionDenied
     # this is the ID of the linkedin group
-    GROUP_ID = 1627067
+    GROUP_ID = 3606611
     POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
     app = get_app(request.user)
     group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
