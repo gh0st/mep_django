@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="container" class="container" style="margin:120px auto 0px auto">
+    <div class="col-md-8">
+        {% for post in post_list %}
+            <div class="row">
+                
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            {% if post.creator.pictureUrl %}
+                            <div class="col-md-1" style="margin:auto 10px auto 8px">
+                                <img class="media-object" style="dislay:inline-block" src="{{ post.creator.pictureUrl }}" alt="user's picture"/></img>
+                            </div><!-- ./col-md-2 -->
+                            {% endif %}
+                            <div class="col-md-8" style="margin:auto auto auto 10px">
+                                <h3 class="panel-title" style="display:inline-block">
+                                    <a href="{{ post.site_group_post_url }}" target="_blank">{{ post.title }}</a>
+                                </h3><br/>
+                                {{ post.creator.firstName }} - {{ post.creationTimestamp }}
+                            </div><!-- ./col-md-6 -->
+                        </div><!-- /.row -->
+                     </div>
+                    <div class="panel-body">
+                        {{ post.summary }}
+                    </div>
+                </div>
+                <hr/>
+
+            </div>
+        {% endfor %}
+    </div><!-- ./col-md-8 -->
+
+    <div class="col-md-4">
+        <div data-spy="affix" data-offset-top="60" data-offset-bottom="200" class="panel panel-default">
+            <div class="panel-body">
+                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                <script type="IN/JYMBII" data-format="inline"></script>
+            </div>
+        </div>
+    </div><!-- ./col-md-4 -->
+
+</div>
