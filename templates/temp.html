@@ -1,0 +1,10 @@
+<html>
+<script>
+function closeAndRefresh() {
+    window.opener.location.reload() // first we want to refresh the parent page
+    window.close() // then we want to close the page which forwarded us to this page
+}
+</script>
+<body onload="javascript:closeAndRefresh()">
+</body>
+</html>

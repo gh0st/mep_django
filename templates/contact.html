@@ -1,6 +1,72 @@
 {% extends "base.html" %}
-{% load url from future %}
+
 {% block content %}
-<p>Template contacts page</p>
+    <div class="container" style="margin:80px auto 30px auto">
+        <h1>Come Talk To Us!</h1>
+        <div class="row">
+            
+            <div class="col-md-7">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Contact Us In Person</h3>
+                    </div>
+                    <div class="panel-body">
+                        If you'd like to come in and meet us we're located on the CSU Sacramento campus.<br/><br/>
+                        <address>
+                            <strong>CSU Sacramento</strong><br/>
+                            6000 J St, Santa Clara Hall 1213<br/>
+                            Sacramento, CA 95819-6023
+                        </address>
+                    </div>
+                </div><!-- ./panel div -->
+            </div><!-- ./col-md-7 div -->
+
+            <div class="col-md-5">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;Contact Us By Phone</h3>
+                    </div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>Main Phone:</dt><dd>916-270-6699</dd>
+                            <dt>Fax:</dt><dd>916-278-7086</dd>
+                            <dt>Receptionist:</dt><dd></dd>
+                            <dt>Career Counseling:</dt><dd></dd>
+                            <dt>Alumni Center:</dt><dd></dd>
+                        </dl>
+                    </div>
+                </div><!-- ./panel div -->
+            </div><!-- ./col-md-5 div -->
+
+        </div><!-- ./row div -->
+
+        <div class="row">
+
+            <div class="col-md-5">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><img src="/static/images/glyphicons_social/glyphicons_social_17_linked_in.png">&nbsp;&nbsp;Contact Us Through LinkedIn</h3>
+                    </div>
+                    <div class="panel-body">
+                        <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                        <script type="IN/CompanyProfile" data-id="2277233" data-format="inline"></script>
+                    </div>
+                </div><!-- ./panel div -->
+            </div><!-- ./col-md-4 div-->
+
+            <div class="col-md-7">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Contact Us By Email</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="mailto:hollmanchad@gmail.com">hollmanchad@gmail.com</a>
+                    </div>
+                </div><!-- ./panel div -->
+            </div><!-- ./col-md-8 div -->
+
+        </div><!-- ./row div -->
+
+    </div> <!-- ./container div -->
 {% endblock %}
 
