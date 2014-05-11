@@ -1,12 +1,21 @@
 {% extends "base.html" %}
-{% load url from future %}
 
 {% block content %}
 <div class="container" style="margin:120px auto 0px auto">
-    <p>{{ name }}</p>
-    <p>{{ headline }}</p>
-    <p>{{ industry }}</p>
-    <p><img src="{{ pic_url }}" alt="user's picture"/></p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ name }}</h3>
+                </div>
+                <div class="panel-body">
+                    <p><img src="{{ pic_url }}"></p>
+                    <p>{{ headline }}</p>
+                    <p>{{ industry }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

@@ -44,7 +44,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default', # added by chad
     'mep_django.linkedin', # added by chad
+    'django_nose',
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
