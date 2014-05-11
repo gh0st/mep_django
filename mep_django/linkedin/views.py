@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
-from social.apps.django_app.default.models import UserSocialAuth
 from linkedin import linkedin
-#from django.http import HttpResponse
+from django.core.exceptions import PermissionDenied
 
+API_KEY = '75l485e9k29snc'
+API_SECRET = 'iw7fONMpJZcY5HOb'
 
 def logout(request):
     """logs the user out, then redirects to the home page"""
@@ -14,7 +15,6 @@ def home(request):
     """displays the home page"""
     return render(request, 'home.html', {})
 
-
 def about(request):
     """displays the about page"""
     return render(request, 'about.html', {})
@@ -23,11 +23,9 @@ def contact(request):
     """displays the contact page"""
     return render(request, 'contact.html', {})
     
-
 def temp(request):
     """this is used for the popup window which houses the linkedin login page"""
     return render(request, 'temp.html', {})
-
 
 def profile(request):
     """displays the user's profile page"""
@@ -53,40 +51,39 @@ def profile(request):
 
 def get_access_tokens(user):
     """Query user database to retrieve OAuth1 access tokens for the currently logged-in user"""
+
+def get_app(user):
+    """Given a valid user object, return a LinkedInApplication instance that can be used to make the Linkedin API calls"""
+    # Query user database to retrieve OAuth1 access tokens for the currently logged-in user"""
     social_user = user.social_auth.get()
     OAUTH_USER_TOKEN = social_user.extra_data['access_token']['oauth_token']
-    OAUTH_USER_TOKEN_SECRET = social_user.extra_data['access_token']['oauth_token_secret']
-    return (OAUTH_USER_TOKEN, OAUTH_USER_TOKEN_SECRET)
+    OAUTH_USER_TOKEN_SECRET = social_user.extra_data['access_token']['oauth_token_secret'] 
+    auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, OAUTH_USER_TOKEN, OAUTH_USER_TOKEN_SECRET, '', linkedin.PERMISSIONS.enums.values())
+    return linkedin.LinkedInApplication(auth)
+
+def discussions(request):
+    """Displays the LinkedIn group content"""
+    # handle unauthorized access with a 403
+    if not request.user.is_authenticated() or not request.user.is_active:
+        raise PermissionDenied
+    # this is the ID of the linkedin group
+    GROUP_ID = 1627067
+    POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
+    app = get_app(request.user)
+    group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
+    return render(request, 'discussions.html', {'post_list':group_posts['values'],})
 
 def news(request):
-    """Diplays the LinkedIn content, this is the critical view of the app"""
-    
-    if not request.user.is_authenticated():
-        return redirect('home')
-    
-    API_KEY = '75l485e9k29snc'
-    API_SECRET = 'iw7fONMpJZcY5HOb'
-    USER_KEY, USER_SECRET = get_access_tokens(request.user)
-    
-    GROUP_ID = 1627067
+    """Diplays the LinkedIn company content, this is the critical view of the app"""
+    # handle unauthorized access with a 403
+    if not request.user.is_authenticated() or not request.user.is_active:
+        raise PermissionDenied
     COMPANY_ID = 1035
-
-    POST_SELECTORS = ['title', 'summary',  'creation-timestamp', 'site-group-post-url', 'creator', 'id',]
     COMPANY_SELECTORS = ['name', 'id'] 
-	
-    auth = linkedin.LinkedInDeveloperAuthentication(API_KEY, API_SECRET, USER_KEY, USER_SECRET, '', linkedin.PERMISSIONS.enums.values())
-    app = linkedin.LinkedInApplication(auth)
-    
-    group_posts = app.get_posts(GROUP_ID, selectors=POST_SELECTORS)
-    
+    app = get_app(request.user)    
     company = app.get_companies(company_ids=[COMPANY_ID], selectors=COMPANY_SELECTORS, params={'is-company-admin': 'true'})
-   
-    updates = app.get_company_updates(COMPANY_ID, params={'count': 10, 'event-type': 'status-update',})
-    
-    import pprint
-    pp = pprint.PrettyPrinter(indent=2)
-    
-    pp.pprint(updates['values'])
+    count = 10
+    updates = app.get_company_updates(COMPANY_ID, params={'count': count, 'event-type': 'status-update',})
     
     update_list = []
     for update in updates['values']:
@@ -98,21 +95,4 @@ def news(request):
             my_dict['shortenedUrl'] = update['updateContent']['companyStatusUpdate']['share']['content'].get('shortenedUrl')
         update_list.append(my_dict)
     
-    
-    
-
-    '''
-    for post in group_posts['values']:
-        for k, v in post.iteritems():
-            if k == 'creator':
-                print 'Creator{'
-                for k2, v2 in post['creator'].iteritems():
-                    print '\t' + str(k2) + ': '
-                    print '\t' + str(v2) + '\n'
-                print '}'
-            else:
-                print str(k) + ': '
-                print str(v) + '\n'
-            #raw_input()
-    '''
-    return render(request, 'news.html', {'post_list':group_posts['values'], 'update_list': update_list})
+    return render(request, 'news.html', {'update_list': update_list,})

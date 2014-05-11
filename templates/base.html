@@ -56,8 +56,7 @@
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'news' %}">News</a></li>
-                {% else %}
-
+                    <li><a href="{% url 'discussions' %}">Discussions</a></li>
                 {% endif %}
                 {% if not user.is_authenticated %}
                     <!-- we know this works, it's been tested, but we want to try to take advantage of twitterbootstrap and use modal! ;) -->
@@ -83,7 +82,6 @@
     <!-- FOOTER -->
     <div class="container" style="margin-top:10px;">
       <footer>
-        
         <p><img style="width:15%;" src="/static/images/MEPnew.png">&copy; 2014 &middot; Web Design: Team Alpha &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
     </div>
@@ -120,3 +118,4 @@
     </script>
   </body>
 </html>
+
