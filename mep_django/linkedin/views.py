@@ -74,10 +74,8 @@ def discussions(request):
     return render(request, 'discussions.html', {'post_list':group_posts['values'],})
 
 def news(request):
-    """Diplays the LinkedIn company content, this is the critical view of the app"""
-    # handle unauthorized access with a 403
-    if not request.user.is_authenticated() or not request.user.is_active:
-        raise PermissionDenied
+
+    """Diplays the LinkedIn content, this is the critical view of the app"""
     COMPANY_ID = 1035
     COMPANY_SELECTORS = ['name', 'id'] 
     app = get_app(request.user)    
